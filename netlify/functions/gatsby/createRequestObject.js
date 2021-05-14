@@ -1,6 +1,7 @@
 const Stream = require("stream");
 const queryString = require("querystring");
 const http = require("http");
+const cookie = require("cookie");
 
 // Mock a HTTP IncomingMessage object from the Netlify Function event parameters
 // Based on API Gateway Lambda Compat
@@ -11,7 +12,7 @@ const createRequestObject = ({ event, context }) => {
     requestContext = {},
     path = "",
     multiValueQueryStringParameters,
-    pathParameters,
+    queryStringParameters,
     httpMethod,
     multiValueHeaders = {},
     body,
@@ -26,27 +27,8 @@ const createRequestObject = ({ event, context }) => {
       ""
     ) || "/";
 
-  let qs = "";
-
-  if (multiValueQueryStringParameters) {
-    qs += queryString.stringify(multiValueQueryStringParameters);
-  }
-
-  if (pathParameters) {
-    const pathParametersQs = queryString.stringify(pathParameters);
-
-    if (qs.length > 0) {
-      qs += `&${pathParametersQs}`;
-    } else {
-      qs += pathParametersQs;
-    }
-  }
-
-  const hasQueryString = qs.length > 0;
-
-  if (hasQueryString) {
-    req.url += `?${qs}`;
-  }
+  req.query = queryStringParameters;
+  req.multiValueQuery = multiValueQueryStringParameters;
 
   req.method = httpMethod;
   req.rawHeaders = [];
@@ -74,6 +56,13 @@ const createRequestObject = ({ event, context }) => {
   req.getHeaders = () => {
     return req.headers;
   };
+
+  const cookies = req.headers.cookie;
+
+  // Gatsby incudes cookie middleware
+  if (cookies) {
+    req.cookies = cookie.parse(cookies);
+  }
 
   req.connection = {};
 

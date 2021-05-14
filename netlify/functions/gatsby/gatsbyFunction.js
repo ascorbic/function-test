@@ -1,9 +1,22 @@
 // @ts-check
 
 const pathToRegexp = require("path-to-regexp");
+const bodyParser = require("co-body");
+const multer = require("multer");
+const parseForm = multer().none();
 
-module.exports = async (req, res, next, functions) => {
-  const { 0: pathFragment } = req.params;
+module.exports = async (req, res, functions) => {
+  console.log(req);
+
+  await new Promise((next) => parseForm(req, res, next));
+  try {
+    if (!req.body) {
+      req.body = await bodyParser(req);
+    }
+  } catch (e) {}
+
+  const pathFragment = decodeURIComponent(req.url.substr(5));
+  console.log({ pathFragment });
 
   // Check first for exact matches.
   let functionObj = functions.find(({ apiRoute }) => apiRoute === pathFragment);
@@ -62,6 +75,6 @@ module.exports = async (req, res, next, functions) => {
       `Executed function "/api/${functionObj.apiRoute}" in ${end - start}ms`
     );
   } else {
-    next();
+    res.status(404).send("Not found");
   }
 };

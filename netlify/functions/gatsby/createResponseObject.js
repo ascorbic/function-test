@@ -21,12 +21,26 @@ const createResponseObject = ({ onResEnd }) => {
     },
   });
   res.headers = {};
+  res.redirect = (statusCode, url) => {
+    if (!url) {
+      url = statusCode;
+      statusCode = 302;
+    }
+    res.writeHead(statusCode, { Location: url });
+    res.end();
+    return res;
+  };
+
   res.writeHead = (status, headers) => {
     response.statusCode = status;
     if (headers) res.headers = Object.assign(res.headers, headers);
 
     // Return res object to allow for chaining
     // Fixes: https://github.com/netlify/next-on-netlify/pull/74
+    return res;
+  };
+  res.status = (code) => {
+    response.statusCode = code;
     return res;
   };
   res.write = (chunk) => {
@@ -40,6 +54,21 @@ const createResponseObject = ({ onResEnd }) => {
         : Buffer.from(response.body),
       Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk),
     ]);
+  };
+  res.send = (data) => {
+    if (res.finished) {
+      return res;
+    }
+    res.end(data);
+    return res;
+  };
+  res.json = (data) => {
+    if (res.finished) {
+      return res;
+    }
+    res.setHeader("content-type", "application/json");
+    res.send(JSON.stringify(data));
+    return res;
   };
   res.setHeader = (name, value) => {
     res.headers[name.toLowerCase()] = value;
