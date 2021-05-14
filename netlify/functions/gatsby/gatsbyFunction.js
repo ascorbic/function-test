@@ -51,7 +51,7 @@ module.exports = async (req, res, functions) => {
     console.log(`Running ${functionObj.apiRoute}`);
     const start = Date.now();
     const pathToFunction =
-      process.env.NODE_ENV === "development"
+      process.env.NETLIFY_DEV === "true"
         ? functionObj.absoluteCompiledFilePath
         : path.join(
             __dirname,
