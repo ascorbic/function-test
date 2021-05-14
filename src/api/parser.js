@@ -1,5 +1,5 @@
 export default function topLevel(req, res) {
-  if (req.query) {
+  if (req.query && Object.keys(req.query).length) {
     res.json(req.query);
   } else if (req.body) {
     res.json(req.body);

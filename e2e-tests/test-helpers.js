@@ -100,16 +100,16 @@ exports.runTests = function runTests(env, host) {
         const result = await res.json();
 
         const { date, ...headers } = Object.fromEntries(res.headers);
-        expect(result).toMatchSnapshot();
-        expect(headers).toMatchSnapshot();
+        expect(result).toMatchSnapshot("result");
+        expect(headers).toMatchSnapshot("headers");
       });
       test(`returns text correctly`, async () => {
         const res = await fetch(`${host}/api/i-am-typescript`);
         const result = await res.text();
 
         const { date, ...headers } = Object.fromEntries(res.headers);
-        expect(result).toMatchSnapshot();
-        expect(headers).toMatchSnapshot();
+        expect(result).toMatchSnapshot("result");
+        expect(headers).toMatchSnapshot("headers");
       });
     });
 

@@ -12,12 +12,14 @@ module.exports = async (req, res, functions) => {
   await new Promise((next) => parseForm(req, res, next));
   try {
     if (!req.body) {
+      console.log("doing bodyparser");
       req.body = await bodyParser(req);
     }
   } catch (e) {}
 
   const pathFragment = decodeURIComponent(req.url.substr(5));
   console.log({ pathFragment });
+  console.log(req.body);
 
   // Check first for exact matches.
   let functionObj = functions.find(({ apiRoute }) => apiRoute === pathFragment);
