@@ -6,3 +6,4 @@ public
 .netlify
 
 netlify/functions/gatsby/functions
+deployment.json

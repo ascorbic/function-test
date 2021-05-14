@@ -15,10 +15,12 @@
     "clean": "gatsby clean",
     "preview": "netlify dev",
     "start-server-and-test": "start-server-and-test preview 8888 test:jest",
-    "deploy": "netlify deploy --json -f > deployment.json",
+    "deploy": "netlify deploy --json -m 'E2E test' > deployment.json",
+    "bundle": "netlify build",
     "test:jest": "jest",
     "test:local": "start-server-and-test",
-    "test:netlify": "TEST_ENV=netlify run-s build deploy test:jest"
+    "test:netlify": "TEST_ENV=netlify run-s bundle deploy test:jest",
+    "test:all": "run-s test:local test:netlify"
   },
   "dependencies": {
     "co-body": "^6.1.0",
