@@ -4,6 +4,7 @@ const pathToRegexp = require("path-to-regexp");
 const bodyParser = require("co-body");
 const multer = require("multer");
 const parseForm = multer().none();
+const path = require("path");
 
 module.exports = async (req, res, functions) => {
   console.log(req);
@@ -49,7 +50,14 @@ module.exports = async (req, res, functions) => {
   if (functionObj) {
     console.log(`Running ${functionObj.apiRoute}`);
     const start = Date.now();
-    const pathToFunction = functionObj.absoluteCompiledFilePath;
+    const pathToFunction =
+      process.env.NODE_ENV === "development"
+        ? functionObj.absoluteCompiledFilePath
+        : path.join(
+            __dirname,
+            "functions",
+            functionObj.relativeCompiledFilePath
+          );
 
     try {
       delete require.cache[require.resolve(pathToFunction)];
