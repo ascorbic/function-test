@@ -1,0 +1,77 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`local functions can parse different ways of sending data form data 1`] = `Object {}`;
+
+exports[`local functions can parse different ways of sending data form parameters 1`] = `Object {}`;
+
+exports[`local functions can parse different ways of sending data json body 1`] = `Object {}`;
+
+exports[`local functions can parse different ways of sending data query string 1`] = `
+Object {
+  "amIReal": "true",
+}
+`;
+
+exports[`local functions get parsed cookies cookie 1`] = `
+Object {
+  "foo": "blue",
+}
+`;
+
+exports[`local response formats returns json correctly 1`] = `
+Object {
+  "amIJSON": true,
+}
+`;
+
+exports[`local response formats returns json correctly 2`] = `
+Object {
+  "connection": "close",
+  "content-type": "application/json",
+  "transfer-encoding": "chunked",
+  "x-powered-by": "Express",
+}
+`;
+
+exports[`local response formats returns text correctly 1`] = `"I am typescript"`;
+
+exports[`local response formats returns text correctly 2`] = `
+Object {
+  "connection": "close",
+  "transfer-encoding": "chunked",
+  "x-powered-by": "Express",
+}
+`;
+
+exports[`local routing dynamic routes 1`] = `
+Object {
+  "super": "additional",
+  "userId": "23",
+}
+`;
+
+exports[`local routing dynamic routes 2`] = `
+Object {
+  "0": "super",
+}
+`;
+
+exports[`local routing routes with special characters 1`] = `"I-Am-Capitalized.js"`;
+
+exports[`local routing routes with special characters 2`] = `"some whitespace.js"`;
+
+exports[`local routing routes with special characters 3`] = `"with-äöü-umlaut.js"`;
+
+exports[`local routing routes with special characters 4`] = `"some-àè-french.js"`;
+
+exports[`local routing routes with special characters 5`] = `"some-אודות.js"`;
+
+exports[`local routing secondary-level API 1`] = `"I am at a secondary-level"`;
+
+exports[`local routing secondary-level API 2`] = `"I am another sub-directory function"`;
+
+exports[`local routing secondary-level API with index.js 1`] = `"I am an index.js in a sub-directory!"`;
+
+exports[`local routing top-level API 1`] = `"I am at the top-level"`;
+
+exports[`local typescript typescript functions work 1`] = `"I am typescript"`;
