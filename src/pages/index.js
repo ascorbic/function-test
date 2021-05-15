@@ -129,6 +129,22 @@ const IndexPage = () => {
             </span>
           </li>
         ))}
+        <li style={listItemStyles} key="form">
+          <span>
+            <span style={linkStyle}>Form parser</span>
+            <form action="/api/parser" method="POST">
+              <input type="hidden" name="hidden" value="hidden field" />
+
+              <input type="text" name="text" value="A text value" />
+
+              <button type="Submit">Submit</button>
+            </form>
+            <p style={descriptionStyle}>
+              A form posted to the parser. Also try using Postman or Insomnia to
+              send a JSON body.
+            </p>
+          </span>
+        </li>
       </ul>
       <img
         alt="Gatsby G Logo"
