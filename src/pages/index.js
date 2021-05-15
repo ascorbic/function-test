@@ -48,9 +48,9 @@ const links = [
   },
   { text: "Cors", url: "api/cors", description: "Uses custom middleware" },
   {
-    text: ".env var",
+    text: "env var",
     url: "api/env-variables",
-    description: "Dumps .env var from build",
+    description: "Reads .env var from build",
   },
   {
     text: "Error caught",
