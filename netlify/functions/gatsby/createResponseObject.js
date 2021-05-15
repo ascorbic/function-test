@@ -40,7 +40,10 @@ const createResponseObject = ({ onResEnd }) => {
     return res;
   };
   res.status = (code) => {
-    response.statusCode = code;
+    const numericCode = parseInt(code);
+    if (!isNaN) {
+      response.statusCode = numericCode;
+    }
     return res;
   };
   res.write = (chunk) => {
