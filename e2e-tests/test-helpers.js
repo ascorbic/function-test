@@ -4,6 +4,9 @@ const fs = require(`fs-extra`);
 const path = require(`path`);
 const FormData = require("form-data");
 
+// Based on Gatsby Functions integration tests
+// Source: https://github.com/gatsbyjs/gatsby/blob/master/integration-tests/functions/test-helpers.js
+
 exports.runTests = function runTests(env, host) {
   describe(env, () => {
     describe(`routing`, () => {

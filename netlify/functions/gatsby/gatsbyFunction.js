@@ -7,19 +7,21 @@ const parseForm = multer().none();
 const path = require("path");
 
 module.exports = async (req, res, functions) => {
-  console.log(req);
-
+  // Multipart form data middleware. because co-body can't handle it
   await new Promise((next) => parseForm(req, res, next));
+
   try {
+    // If req.body is populated then it was multipart data
     if (!req.body) {
-      console.log("doing bodyparser");
       req.body = await bodyParser(req);
     }
   } catch (e) {}
 
+  //  Strip "/api/" from path
   const pathFragment = decodeURIComponent(req.url.substr(5));
-  console.log({ pathFragment });
-  console.log(req.body);
+
+  // Find the matching function, given a path. Based on Gatsby Functions dev server implementation
+  // https://github.com/gatsbyjs/gatsby/blob/master/packages/gatsby/src/internal-plugins/functions/gatsby-node.ts
 
   // Check first for exact matches.
   let functionObj = functions.find(({ apiRoute }) => apiRoute === pathFragment);
@@ -52,6 +54,8 @@ module.exports = async (req, res, functions) => {
   if (functionObj) {
     console.log(`Running ${functionObj.apiRoute}`);
     const start = Date.now();
+    // In dev mode, load the function from the compiled output dir.
+    // In production, load the version copied into the function directory.
     const pathToFunction =
       process.env.NETLIFY_DEV === "true"
         ? functionObj.absoluteCompiledFilePath

@@ -21,15 +21,6 @@ const createResponseObject = ({ onResEnd }) => {
     },
   });
   res.headers = {};
-  res.redirect = (statusCode, url) => {
-    if (!url) {
-      url = statusCode;
-      statusCode = 302;
-    }
-    res.writeHead(statusCode, { Location: url });
-    res.end();
-    return res;
-  };
 
   res.writeHead = (status, headers) => {
     response.statusCode = status;
@@ -39,13 +30,7 @@ const createResponseObject = ({ onResEnd }) => {
     // Fixes: https://github.com/netlify/next-on-netlify/pull/74
     return res;
   };
-  res.status = (code) => {
-    const numericCode = parseInt(code);
-    if (!isNaN(code)) {
-      response.statusCode = numericCode;
-    }
-    return res;
-  };
+
   res.write = (chunk) => {
     if (!response.body) {
       response.body = Buffer.from("");
@@ -57,21 +42,6 @@ const createResponseObject = ({ onResEnd }) => {
         : Buffer.from(response.body),
       Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk),
     ]);
-  };
-  res.send = (data) => {
-    if (res.finished) {
-      return res;
-    }
-    res.end(data);
-    return res;
-  };
-  res.json = (data) => {
-    if (res.finished) {
-      return res;
-    }
-    res.setHeader("content-type", "application/json");
-    res.send(JSON.stringify(data));
-    return res;
   };
   res.setHeader = (name, value) => {
     res.headers[name.toLowerCase()] = value;
@@ -111,6 +81,43 @@ const createResponseObject = ({ onResEnd }) => {
     res.writableEnded = true;
     // Call onResEnd handler with the response object
     onResEnd(response);
+  };
+
+  // Gatsby Functions additions
+
+  res.send = (data) => {
+    if (res.finished) {
+      return res;
+    }
+    res.end(data);
+    return res;
+  };
+
+  res.json = (data) => {
+    if (res.finished) {
+      return res;
+    }
+    res.setHeader("content-type", "application/json");
+    res.send(JSON.stringify(data));
+    return res;
+  };
+
+  res.status = (code) => {
+    const numericCode = parseInt(code);
+    if (!isNaN(code)) {
+      response.statusCode = numericCode;
+    }
+    return res;
+  };
+
+  res.redirect = (statusCode, url) => {
+    if (!url) {
+      url = statusCode;
+      statusCode = 302;
+    }
+    res.writeHead(statusCode, { Location: url });
+    res.end();
+    return res;
   };
 
   return res;

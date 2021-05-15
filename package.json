@@ -1,8 +1,8 @@
 {
-  "name": "funciton-test",
+  "name": "function-test",
   "version": "1.0.0",
   "private": true,
-  "description": "Funciton test",
+  "description": "Function test",
   "author": "Matt Kane",
   "keywords": [
     "gatsby"
@@ -25,7 +25,6 @@
     "co-body": "^6.1.0",
     "cookies": "^0.8.0",
     "gatsby": "^3.4.1",
-    "gatsby-plugin-netlify": "^3.5.0",
     "multer": "^1.4.2",
     "react": "^17.0.1",
     "react-dom": "^17.0.1"
@@ -35,5 +34,6 @@
     "jest": "^26.6.3",
     "npm-run-all": "^4.1.5",
     "start-server-and-test": "^1.12.2"
-  }
+  },
+  "license": "MIT"
 }

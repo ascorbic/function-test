@@ -57,9 +57,10 @@ const createRequestObject = ({ event, context }) => {
     return req.headers;
   };
 
+  // Gatsby includes cookie middleware
+
   const cookies = req.headers.cookie;
 
-  // Gatsby incudes cookie middleware
   if (cookies) {
     req.cookies = cookie.parse(cookies);
   }
