@@ -82,7 +82,7 @@ const links = [
   { text: "Non-latin characters", url: "api/some-אודות" },
   {
     text: "Status",
-    url: "api/status",
+    url: "api/status?code=418",
     description: "Sets status code using status() helper",
   },
   { text: "Directory index", url: "api/a-directory" },
