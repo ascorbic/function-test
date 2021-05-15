@@ -135,7 +135,7 @@ const IndexPage = () => {
             <form action="/api/parser" method="POST">
               <input type="hidden" name="hidden" value="hidden field" />
 
-              <input type="text" name="text" value="A text value" />
+              <input type="text" name="text" defaultValue="A text value" />
 
               <button type="Submit">Submit</button>
             </form>

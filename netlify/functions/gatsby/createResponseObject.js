@@ -41,7 +41,7 @@ const createResponseObject = ({ onResEnd }) => {
   };
   res.status = (code) => {
     const numericCode = parseInt(code);
-    if (!isNaN) {
+    if (!isNaN(code)) {
       response.statusCode = numericCode;
     }
     return res;
