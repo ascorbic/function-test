@@ -4,6 +4,8 @@ export default function topLevel(req, res) {
   } else if (req.body) {
     res.json(req.body);
   } else {
-    res.json({ nobody: `no body was sent`, req });
+    res.json({
+      message: `No body was sent. Try a POST request or query string`,
+    });
   }
 }
