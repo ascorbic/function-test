@@ -1,3 +1,4 @@
+import { StaticImage } from "gatsby-plugin-image";
 import * as React from "react";
 
 // styles
@@ -116,6 +117,11 @@ const IndexPage = () => {
     <main style={pageStyles}>
       <title>Home Page</title>
       <h1>Gatsby Functions demo</h1>
+      <StaticImage
+        src="../images/icon.png"
+        alt="Icon"
+        formats={["auto", "webp", "avif"]}
+      />
       <ul style={listStyles}>
         {links.map((link) => (
           <li key={link.url} style={{ ...listItemStyles, color: link.color }}>

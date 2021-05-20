@@ -5,5 +5,5 @@ module.exports = {
   siteMetadata: {
     title: "Function test",
   },
-  plugins: [],
+  plugins: ["gatsby-plugin-sharp", "gatsby-plugin-image"],
 };

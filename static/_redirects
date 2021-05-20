@@ -1,0 +1,2 @@
+/static/:sourceDigest/:queryDigest/:filename /.netlify/functions/gatsby-image 200
+

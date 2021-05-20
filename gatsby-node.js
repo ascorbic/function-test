@@ -14,10 +14,15 @@ exports.onPostBuild = async ({ store }) => {
     "functions"
   );
   await copy(compiledFunctionsDir, netlifyFunctionDir);
+  // console.log("Copying image data");
+  // await copy(
+  //   path.join(root, ".cache", "caches", "gatsby-runner"),
+  //   path.join(root, "netlify", "functions", "gatsby-image", "data")
+  // );
 
   // Add a splat rewrite for the /api/ route
-  await writeFile(
-    path.join(root, "public", "_redirects"),
-    `/api/* /.netlify/functions/gatsby 200`
-  );
+  // await writeFile(
+  //   path.join(root, "public", "_redirects"),
+  //   `/api/* /.netlify/functions/gatsby 200`
+  // );
 };
