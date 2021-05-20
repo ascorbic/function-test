@@ -3,5 +3,5 @@ command = "yarn build:netlify"
 
 [functions.gatsby-image]
 node_bundler = "esbuild"
-external_node_modules = ["sharp", "gatsby-plugin-sharp", "electron"]
+# external_node_modules = ["sharp", "gatsby-plugin-sharp", "electron"]
 include_files = [".cache/caches/gatsby-runner"]
