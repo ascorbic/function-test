@@ -4,4 +4,4 @@ command = "yarn build:netlify"
 [functions.gatsby-image]
 node_bundler = "esbuild"
 external_node_modules = ["electron"]
-include_files = [".cache/caches/gatsby-runner"]
+included_files = [".cache/caches/gatsby-runner/**/*.json"]
