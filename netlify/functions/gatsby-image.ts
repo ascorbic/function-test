@@ -1,17 +1,23 @@
-// @ts-check
-const { builder } = require("@netlify/functions");
-const { processFile } = require("gatsby-plugin-sharp/process-file");
-const tempy = require("tempy");
-const path = require("path");
-const download = require("download");
-const { readFileSync } = require("fs");
+import { builder } from "@netlify/functions";
+import { processFile } from "gatsby-plugin-sharp/process-file";
+import tempy from "tempy";
+import path from "path";
+import download from "download";
+import { readFileSync, statSync } from "fs";
 
-async function handler(event) {
+// 6MB is hard max Lambda response size
+const MAX_RESPONSE_SIZE = 6291456;
+
+async function imageHandler(event) {
   const [, , fileHash, queryHash, fileName] = event.path.split("/");
+  console.log(process.env);
   console.log({ fileHash, queryHash, fileName });
   let imageData;
   try {
-    imageData = require(`../../../.cache/caches/gatsby-runner/${fileHash}/${queryHash}.json`);
+    imageData = require(path.join(
+      process.env.LAMBDA_RUNTIME_DIR,
+      `.cache/caches/gatsby-runner/${fileHash}/${queryHash}.json`
+    ));
   } catch (e) {
     console.error(e);
     return {
@@ -24,13 +30,13 @@ async function handler(event) {
     process.env.DEPLOY_URL || `http://${event.headers.host}`
   }/static/${fileHash}/${imageData.originalImage}`;
 
+  console.log("Downloading original image", originalImageURL);
+
   const tempdir = tempy.directory();
 
   await download(originalImageURL, tempdir);
 
   const outFile = path.join(tempdir, imageData.originalImage);
-
-  let processed;
 
   const outputPath = path.join(
     tempdir,
@@ -38,7 +44,7 @@ async function handler(event) {
   );
 
   try {
-    processed = await Promise.all(
+    await Promise.all(
       processFile(
         outFile,
         [
@@ -53,8 +59,20 @@ async function handler(event) {
   } catch (e) {
     console.error(e);
     return {
+      headers: {
+        "Content-Type": `application/json`,
+      },
       statusCode: 500,
       body: JSON.stringify(e),
+    };
+  }
+
+  const stats = statSync(outputPath);
+
+  if (stats.size > MAX_RESPONSE_SIZE) {
+    return {
+      statusCode: 400,
+      body: "Requested image is too large. Maximum size is 6MB.",
     };
   }
 
@@ -68,4 +86,4 @@ async function handler(event) {
   };
 }
 
-exports.handler = builder(handler);
+export const handler = builder(imageHandler);
