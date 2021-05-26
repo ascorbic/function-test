@@ -14,10 +14,7 @@ async function imageHandler(event) {
   console.log({ fileHash, queryHash, fileName });
   let imageData;
   try {
-    imageData = require(path.join(
-      process.env.LAMBDA_RUNTIME_DIR,
-      `.cache/caches/gatsby-runner/${fileHash}/${queryHash}.json`
-    ));
+    imageData = require(`${process.env.LAMBDA_TASK_ROOT}/src/.cache/caches/gatsby-runner/${fileHash}/${queryHash}.json`);
   } catch (e) {
     console.error(e);
     return {
