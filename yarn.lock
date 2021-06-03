@@ -1798,9 +1798,10 @@
   dependencies:
     is-promise "^4.0.0"
 
-"@netlify/gatsby-runner@github:netlify/gatsby-runner":
-  version "0.0.1"
-  resolved "https://codeload.github.com/netlify/gatsby-runner/tar.gz/503ee2683eac90fcb2ec9fdb27e4c2a3a2ee5bc7"
+"@netlify/gatsby-runner@^0.0.2":
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/@netlify/gatsby-runner/-/gatsby-runner-0.0.2.tgz#12a3f159ec32114dcaf75ea50a727aa3810419c2"
+  integrity sha512-DmRSOUjDzJRALzKI9oSuLmiaeCLOKEpURFbIw5B1P5QpYc6ZiPiWE2+SwzZ+OPigAgz4SLUb4HylR7dvqw1FXw==
   dependencies:
     "@netlify/functions" "^0.7.2"
     execa "^5.0.0"
@@ -6507,7 +6508,7 @@ gatsby-recipes@^0.17.0:
     xstate "^4.9.1"
     yoga-layout-prebuilt "^1.9.6"
 
-gatsby-source-filesystem@^3.5.0:
+gatsby-source-filesystem@^3.6.0:
   version "3.6.0"
   resolved "https://registry.yarnpkg.com/gatsby-source-filesystem/-/gatsby-source-filesystem-3.6.0.tgz#369eaef6fe8ae07739594176aedc36606a328849"
   integrity sha512-kTWcW9LwCLOF3TMC9lBR6KbMi6A0SHNQeGNLBw8THRpDVVe5nXZG33oI1Ns23ocNDVrajIMKXPPzsrl2zjG6BQ==
