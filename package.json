@@ -11,7 +11,6 @@
     "develop": "HOST=0.0.0.0 gatsby develop",
     "start": "HOST=0.0.0.0 gatsby develop",
     "build": "gatsby build",
-    "build:netlify": "gatsby-runner",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "preview": "netlify dev",
@@ -24,7 +23,6 @@
   },
   "dependencies": {
     "@netlify/functions": "^0.7.2",
-    "@netlify/gatsby-runner": "^0.0.2",
     "co-body": "^6.1.0",
     "cookies": "^0.8.0",
     "download": "^8.0.0",
