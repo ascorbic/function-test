@@ -22,7 +22,7 @@
     "test:all": "run-s test:local test:netlify"
   },
   "dependencies": {
-    "@netlify/functions": "^0.7.2",
+    "@netlify/functions": "^1.0.0",
     "co-body": "^6.1.0",
     "cookies": "^0.8.0",
     "download": "^8.0.0",
@@ -30,7 +30,7 @@
     "gatsby-plugin-image": "next",
     "gatsby-plugin-sharp": "next",
     "gatsby-source-filesystem": "next",
-    "multer": "^1.4.2",
+    "multer": "^1.4.5-lts.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "tempy": "^1.0.1"
